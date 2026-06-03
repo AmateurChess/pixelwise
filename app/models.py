@@ -1,11 +1,17 @@
+from sqlalchemy import (Column, Integer, String,
+                        Float, DateTime)
+from sqlalchemy.orm import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
-from sqlalchemy import (Column, Integer, String,
-Float, DateTime)
-from sqlalchemy.orm import declarative_base
-from datetime import datetime
+
+engine = create_engine(os.getenv("DATABASE_URL"))
+SessionLocal = sessionmaker(bind=engine)
+
 Base = declarative_base()
 class Prediction(Base):
     __tablename__ = "predictions"
@@ -14,12 +20,4 @@ class Prediction(Base):
     confidence = Column(Float, nullable=False)
     model_version = Column(String, nullable=False)
     created_at = Column(DateTime,
-    default=datetime.utcnow)
-
-
-import os
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine(os.getenv("DATABASE_URL"))
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+                        default=datetime.utcnow)
