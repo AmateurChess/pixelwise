@@ -1,3 +1,7 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 from sqlalchemy import (Column, Integer, String,
 Float, DateTime)
 from sqlalchemy.orm import declarative_base
