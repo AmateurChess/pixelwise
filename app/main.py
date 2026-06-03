@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request, Depends
 from pydantic import BaseModel
 import numpy as np
 from app.classifier import classify_batch
-from app.models import Prediction, SessionLocal
+from app.models import Prediction
 class ClassifyRequest(BaseModel):
     pixels: list[list[int]]
 class ClassifyResponse(BaseModel):
