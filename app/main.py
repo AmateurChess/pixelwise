@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Header, HTTPException, Request, Depends
 from pydantic import BaseModel
 import numpy as np
