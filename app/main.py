@@ -14,7 +14,7 @@ load_dotenv()
 ENABLE_HOTSWAP = os.getenv("ENABLE_HOTSWAP", "false").lower() == "true"
 
 class ClassifyRequest(BaseModel):
-    pixels: list[list[int]]
+    pixels: list[list[int]]
 
 class ClassifyResponse(BaseModel):
     prediction: str
