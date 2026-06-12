@@ -7,6 +7,9 @@ from app.models import Prediction, SessionLocal
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.middleware import SlowAPIMiddleware
+from dotenv import load_dotenv
+
+load_dotenv()
 
 ENABLE_HOTSWAP = os.getenv("ENABLE_HOTSWAP", "false").lower() == "true"
 
