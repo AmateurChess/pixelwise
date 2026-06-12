@@ -21,11 +21,6 @@ class ClassifyResponse(BaseModel):
 class SwapRequest(BaseModel):
     model_path: str
 
-def verify_api_key(x_api_key: str = Header(...)):
-    if x_api_key != os.getenv("SECRET_API_KEY"):
-        raise HTTPException(
-            status_code=401, detail="Invalid API key")
-
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
 
@@ -72,8 +67,7 @@ def classify(request: Request, req: ClassifyRequest):
     db.close()
     return result
 
-@app.post("/admin/swap-model",
-          dependencies=[Depends(verify_api_key)])
+@app.post("/admin/swap-model")
 def admin_swap_model(req: SwapRequest):
     if not ENABLE_HOTSWAP:
         raise HTTPException(
