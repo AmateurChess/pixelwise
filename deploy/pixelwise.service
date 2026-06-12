@@ -2,6 +2,7 @@
 Description=PixelWise API
 After=network.target
 [Service]
+Environment=ENABLE_HOTSWAP=false
 User=produser
 WorkingDirectory=/opt/pixelwise
 EnvironmentFile=/opt/pixelwise/.env

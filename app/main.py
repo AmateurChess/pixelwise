@@ -7,6 +7,7 @@ from app.models import Prediction, SessionLocal
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.middleware import SlowAPIMiddleware
+from app.classifier import classify_batch, swap_model 
 class ClassifyRequest(BaseModel):
     pixels: list[list[int]]
 class ClassifyResponse(BaseModel):
@@ -57,3 +58,31 @@ def classify(request: Request,
     db.commit()
     db.close()
     return result
+class SwapRequest(BaseModel):
+    model_path: str
+
+ENABLE_HOTSWAP = os.getenv("ENABLE_HOTSWAP", "false").lower() == "true"
+
+@app.post("/admin/swap-model", dependencies=[Depends(verify_api_key)])
+def admin_swap_model(req: SwapRequest):
+    if not ENABLE_HOTSWAP:
+        raise HTTPException(status_code=403, detail="Hotswap ist in dieser Methode deaktiviert.")
+    try:
+        swap_model(req.model_path)
+        return {"status": "ok", "model_path": req.model_path}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e)) 
+@app.on_event("startup")
+
+def startup_event():
+    try:
+        swap_model("models/default_model.pkl")
+    except Exception as e:
+        print(f"Warnung: Start-Modell konnte nicht geladen werden: {e}")
+
+ENABLE_HOTSWAP = os.getenv("ENABLE_HOTSWAP", "false").lower() == "true"
+
+@app.post("/admin/swap-model")
+def admin_swap_model(req: SwapRequest):
+    if not ENABLE_HOTSWAP:
+        raise HTTPException(status_code=404, detail="Methode nicht verfügbar")

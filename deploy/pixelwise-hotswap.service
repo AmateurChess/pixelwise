@@ -1,15 +1,16 @@
 [Unit]
-Description=PixelWise API
+Description=PixelWise API - Hotswap Mode
 After=network.target
+
 [Service]
-Environment=ENABLE_HOTSWAP=false
+Environment=ENABLE_HOTSWAP=true
 User=produser
 WorkingDirectory=/opt/pixelwise
 EnvironmentFile=/opt/pixelwise/.env
 ExecStart=/opt/pixelwise/.venv/bin/gunicorn \
 app.main:app --worker-class uvicorn.workers.UvicornWorker \
---workers 3 --bind 0.0.0.0:8000
+--workers 3 --bind 0.0.0.0:8000 \
+--timeout 120
 Restart=always
-RestartSec=3
 [Install]
 WantedBy=multi-user.target
