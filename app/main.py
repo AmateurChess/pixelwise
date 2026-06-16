@@ -59,8 +59,7 @@ def results():
         for r in rows]}
 
 @app.post("/classify",
-        response_model=ClassifyResponse,
-        dependencies=[Depends(verify_api_key)])
+        response_model=ClassifyResponse)
 @limiter.limit("30/minutes")
 def classify(request: Request, req: ClassifyRequest):
     arr = np.array(req.pixels,
