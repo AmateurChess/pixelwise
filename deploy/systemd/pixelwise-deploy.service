@@ -6,13 +6,3 @@ Type=oneshot
 User=produser
 WorkingDirectory=/opt/pixelwise
 ExecStart=/opt/pixelwise/deploy/auto-deploy.sh
-
-nano deploy/systemd/pixelwise-deploy.timer
-[Unit]
-Description=Run PixelWise auto-deploy
-[Timer]
-OnBootSec=15s
-OnUnitActiveSec=30s
-Unit=pixelwise-deploy.service
-[Install]
-WantedBy=timers.target

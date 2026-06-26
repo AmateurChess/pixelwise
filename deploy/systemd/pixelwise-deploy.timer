@@ -1,9 +1,8 @@
 [Unit]
-Description=Run PixelWise auto-deploy daily
-
+Description=Run PixelWise auto-deploy
 [Timer]
-OnCalendar=*-*-* 03:00:00
-Persistent=true
-
+OnBootSec=15s
+OnUnitActiveSec=30s
+Unit=pixelwise-deploy.service
 [Install]
 WantedBy=timers.target
