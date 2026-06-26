@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI, Header, HTTPException, Request, Depends
 from pydantic import BaseModel
 import numpy as np
-from app.classifier import classify_batch, swap_model
+from app.classifier import classify_batch
 from app.models import Prediction, SessionLocal
 from slowapi import Limiter
 from slowapi.util import get_remote_address
