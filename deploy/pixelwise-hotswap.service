@@ -3,7 +3,6 @@ Description=PixelWise API - Hotswap Mode
 After=network.target
 
 [Service]
-Environment=ENABLE_HOTSWAP=true
 User=produser
 WorkingDirectory=/opt/pixelwise
 EnvironmentFile=/opt/pixelwise/.env
