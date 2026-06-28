@@ -4,7 +4,7 @@ import json
 import requests
 
 BASE_URL = "http://localhost:8000"
-API_KEY = "meinGeheimnis123"
+API_KEY = "REPLACE_ME"
 FLAGS_FILE_PATH = "flags.json"
 POLL_CHECK_EVERY_S = 0.05
 TIMEOUT_S = 30
