@@ -44,9 +44,6 @@ def verify_api_key(x_api_key: str = Header(...)):
 
 
 def hotswap_currently_enabled() -> bool:
-    """Fragt je nach FLAG_METHOD die passende Feature-Flag-Implementierung
-    ab. Beide Methoden steuern dieselbe Funktionalitaet (swap_model), nur
-    die Art, wie der Flag-Zustand gelesen wird, unterscheidet sich."""
     if FLAG_METHOD == "polling":
         return is_hotswap_enabled_polling()
     return is_hotswap_enabled_inmemory()
