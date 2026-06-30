@@ -1,5 +1,9 @@
 # PixelWise – Feature Flags & Downtime Reduction
 
+> **Abgabestand:** Der für die Bewertung relevante Stand ist als Git-Tag
+> `v1.0.0` markiert (Abgabe: 30.06.2026). Spätere Commits können
+> Weiterentwicklungen nach der Abgabe enthalten.
+
 Dieses Repository erweitert PixelWise (Full Stack Handwerk, Block 4 & 5) um
 zwei Feature-Flag-Implementierungen, die den bestehenden In-Memory Hot Swap
 zur Laufzeit absichern. Der vollständige Projektbericht liegt im
@@ -118,3 +122,8 @@ bash deploy/status.sh
 und nicht Teil der hier untersuchten Feature-Flag-Methoden. `hotswap`
 startet den Dienst mit `FLAG_METHOD=inmemory` (siehe
 `pixelwise-hotswap.service`).
+
+**Für diese Arbeit relevant ist ausschließlich der Modus `hotswap`.**
+`baseline` und `gunicorn` dienen nur als Referenz aus dem Kursumfeld und
+werden im Projektbericht bewusst nicht vertieft (siehe Einleitung des
+Berichts).
