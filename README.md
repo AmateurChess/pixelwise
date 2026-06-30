@@ -1,8 +1,7 @@
 # PixelWise – Feature Flags & Downtime Reduction
 
 > **Abgabestand:** Der für die Bewertung relevante Stand ist als Git-Tag
-> `v1.0.0` markiert (Abgabe: 30.06.2026). Spätere Commits können
-> Weiterentwicklungen nach der Abgabe enthalten.
+> `v1.0.0` markiert. 
 
 Dieses Repository erweitert PixelWise (Full Stack Handwerk, Block 4 & 5) um
 zwei Feature-Flag-Implementierungen, die den bestehenden In-Memory Hot Swap
