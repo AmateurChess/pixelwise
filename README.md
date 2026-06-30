@@ -82,6 +82,21 @@ echo '{"hotswap_enabled": true}' > flags.json
 Die Änderung wird hier erst nach Ablauf des Polling-Intervalls wirksam
 (Standard 5s, einstellbar über `FLAG_POLL_INTERVAL_SECONDS`).
 
+## Hinweis: Mehrprozessbetrieb (Gunicorn, mehrere Worker)
+
+Bei `FLAG_METHOD=inmemory` liegt der Flag-Zustand als globale Variable im
+Speicher des jeweiligen Prozesses. Läuft der Dienst wie auf dem
+Produktionsserver mit mehreren Gunicorn-Workern (`-w 3`), hat **jeder
+Worker seinen eigenen, getrennten Flag-Zustand**. Ein Toggle-Request wirkt
+zunächst nur auf den Worker, der ihn entgegennimmt – die übrigen Worker
+beantworten Anfragen währenddessen weiterhin mit ihrem alten Zustand,
+bis auch sie einen Toggle-Request erhalten. Das ist insbesondere beim
+Testen über `curl` relevant, falls aufeinanderfolgende Requests von
+unterschiedlichen Workern beantwortet werden. Eine prozessübergreifende
+Synchronisation (z. B. über einen externen Speicher wie Redis) ist
+nicht implementiert; bei `FLAG_METHOD=polling` tritt dieses Problem
+nicht auf, da jeder Worker dieselbe `flags.json` liest.
+
 ## Reaktionszeit messen
 
 ```bash
